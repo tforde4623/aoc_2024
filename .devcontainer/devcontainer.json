@@ -1,0 +1,16 @@
+{
+    "name": "Elixir",
+    "image": "mcr.microsoft.com/devcontainers/elixir:latest",
+    "postCreateCommand": "mix deps.get",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "jakebecker.elixir-ls",
+                "vscodevim.vim"
+            ]
+        }
+    }
+}
