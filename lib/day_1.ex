@@ -11,7 +11,7 @@ defmodule Problem1 do
   end
 
   def part1 do
-    {col1, col2} = parse_column_file("input_1.txt")
+    {col1, col2} = parse_column_file("./inputs/input_1.txt")
 
     if length(col1) != length(col2) do
       raise "Error: Column lengths are not equal!"
@@ -27,7 +27,7 @@ defmodule Problem1 do
   end
 
   def part2 do
-    {col1, col2} = parse_column_file("input_1.txt")
+    {col1, col2} = parse_column_file("./inputs/input_1.txt")
 
     Enum.reduce(col1, 0, fn val1, acc -> 
       count = Enum.count(col2, fn val2 -> val2 == val1 end)
