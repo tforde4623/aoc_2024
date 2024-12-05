@@ -1,16 +1,24 @@
 {
     "name": "Elixir",
-    "image": "mcr.microsoft.com/devcontainers/elixir:latest",
-    "postCreateCommand": "mix deps.get",
+    "build":{
+      "dockerfile": "Dockerfile",
+      "context": ".."
+    },
     "customizations": {
         "vscode": {
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "bash"
-            },
-            "extensions": [
+              },
+                "extensions": [
+                "editorconfig.editorconfig",
+                "github.vscode-pull-request-github",
                 "jakebecker.elixir-ls",
+                "redhat.vscode-yaml",
                 "vscodevim.vim"
             ]
         }
-    }
-}
+    },
+    "appPort": [],
+    "postCreateCommand": "",
+    "remoteUser": "vscode"
+  }
