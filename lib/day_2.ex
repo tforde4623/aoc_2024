@@ -1,5 +1,4 @@
-
-defmodule Problem2 do
+defmodule Day2 do
 
   # TODO: can we make a parse_file function, where we can pass in the logic
   # as a callback function?

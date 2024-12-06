@@ -1,4 +1,4 @@
-defmodule Problem1 do
+defmodule Day1 do
 
   # parsing for column specific file inputs
   defp parse_column_file(file_path) do
@@ -10,8 +10,8 @@ defmodule Problem1 do
       end)
   end
 
-  def part1 do
-    {col1, col2} = parse_column_file("./inputs/input_1.txt")
+  def part1(file_path) do
+    {col1, col2} = parse_column_file(file_path)
 
     if length(col1) != length(col2) do
       raise "Error: Column lengths are not equal!"
@@ -26,8 +26,8 @@ defmodule Problem1 do
     end)
   end
 
-  def part2 do
-    {col1, col2} = parse_column_file("./inputs/input_1.txt")
+  def part2(file_path) do
+    {col1, col2} = parse_column_file(file_path)
 
     Enum.reduce(col1, 0, fn val1, acc -> 
       count = Enum.count(col2, fn val2 -> val2 == val1 end)
