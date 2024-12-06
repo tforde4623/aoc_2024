@@ -1,8 +1,13 @@
 defmodule Day1 do
   use ExUnit.Case
+  # what does doctest do?
   # doctest Aoc2024Elixir
 
-  test "greets the world" do
-    assert Aoc2024Elixir.hello() == :world
+  test "part1/0" do
+    assert Day1.part1() == 10
+  end
+
+  test "part2/0" do
+    assert Day1.part2() == 10
   end
 end
