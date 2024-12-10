@@ -17,24 +17,45 @@ defmodule Day2 do
     end)
   end
 
-# TODO: def vs defp
-  def is_safe?([]), do: true
-  def is_safe?([_]), do: true
-  def is_safe?([a, b | rest]) do
-    abs(a - b) in 1..3 and is_safe?([b | rest])
+  defp is_safe(list) do
+      ascending? = 
+        Enum.chunk_every(list, 2, 1, :discard)
+        |> Enum.all?(fn [a, b] -> a < b and abs(a - b) in 1..3 end)
+
+      descending? = 
+        Enum.chunk_every(list, 2, 1, :discard)
+        |> Enum.all?(fn [a, b] -> a > b and abs(a - b) in 1..3 end)
+
+      ascending? or descending?
   end
   
-  def part1 do
+  def part1(file_path) do
     # should return how many reports are safe
-    report = parse_reports_file("./inputs/test_input_2.txt")
-
-    # enum vs stream map
-    report
-    |> Enum.map(&is_safe?/1)
+    parse_reports_file(file_path)
+    |> Enum.count(fn row -> is_safe(row) end) # enum vs stream?
   end
 
-  def part2 do
-    
+  defp process_with_removals(list, logic_fn) do
+    list
+    |> Enum.with_index()
+    |> Enum.map(fn {_, idx} ->
+      modified_list = List.delete_at(list, idx)
+      logic_fn.(modified_list)
+    end)
+  end
+
+  # does the same as is_safe/1 but allows for 1 fault (basically we allow 1 number that is outside of the 1..3 tolerance to be removed,
+  # a note though, the numbers around it must follow the rules)
+  defp is_safe_fault_tolerant(list) do
+    process_with_removals(list, &is_safe/1)
+    |> Enum.any?(&(&1))
+  end
+
+  def part2(file_path) do
+    file_path
+    |> parse_reports_file()
+    |> Enum.map(&is_safe_fault_tolerant/1)
+    |> Enum.count(&(&1))
   end
 
 end
